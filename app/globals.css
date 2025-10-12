@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+}
+
+.extra-space {
+  padding: 32px;
+}
