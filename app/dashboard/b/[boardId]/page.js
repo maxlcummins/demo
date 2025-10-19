@@ -56,9 +56,9 @@ export default async function FeedbackBoard({ params }) {
       <section className="max-w-5xl mx-auto px-5 py-12 space-y-12">
         <h1 className="font-extrabold text-xl mb-4">{board.name}</h1>
 
-        <CardBoardLink boardId={boardId} />
+        <CardBoardLink boardId={board._id.toString()} />
 
-        <ButtonDeleteBoard boardId={boardId} />
+        <ButtonDeleteBoard boardId={board._id.toString()} />
       </section>
     </main>
   );

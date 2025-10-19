@@ -40,8 +40,8 @@ export async function POST(req) {
     const user = await User.findById(session.user.id);
 
     // If somehow the session exists but the user isn't found, guard against it
-    if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+    if (!user.hasAccess) {
+      return NextResponse.json({ error: "Please subscribe first" }, { status: 403 });
     }
 
     // Create the new Board with a reference to the user
@@ -86,14 +86,18 @@ export async function DELETE(req) {
       return NextResponse.json({ error: "Not authorized" }, { status: 401 });
     }
 
+    const user = await User.findById(session?.user?.id);
+
+    if (!user.hasAccess) {
+      return NextResponse.json({ error: "Please subscribe first" }, { status: 403 });
+    }
+
     await Board.deleteOne({
       _id: boardId,
       userId: session?.user?.id,
     });
 
-    const user = await User.findById(session?.user?.id);
-
-    user.board = user.boards.filter((id) => id.toString() !== boardId);
+    user.boards = user.boards.filter((id) => id.toString() !== boardId);
 
     await user.save();
 

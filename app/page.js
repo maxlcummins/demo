@@ -1,4 +1,5 @@
 import ButtonLogin from "@/components/ButtonLogin";
+import ButtonCheckout from "@/components/ButtonCheckout";
 import FAQListItem from "@/components/FAQListItem";
 import Image from "next/image";
 import productDemo from "./productDemo.jpeg";
